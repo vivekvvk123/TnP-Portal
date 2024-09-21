@@ -4,6 +4,7 @@ import Main from './layouts/Main'
 import About from './pages/About'
 import TPO_Dashboard from './pages/TPO_Dashboard'
 import Login from './pages/Login'
+import Student_Dashboard from './pages/Student_Dashboard'
 
 const router= createBrowserRouter([
   {

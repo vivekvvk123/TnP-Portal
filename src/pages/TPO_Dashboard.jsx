@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { BriefcaseIcon, CalendarIcon, ClipboardListIcon, CodeIcon, DotIcon, LayoutGridIcon, PlusIcon, UsersIcon } from '@/assets/icons'
+import {BriefcaseIcon, CalendarIcon, ClipboardListIcon, CodeIcon, DotIcon, LayoutGridIcon, PlusIcon, UsersIcon } from '@/assets/icons'
 
 
 function TPO_Dashboard() {

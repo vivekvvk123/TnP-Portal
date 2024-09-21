@@ -1,16 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BriefcaseIcon } from '@/assets/icons'
-import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-
+import { BriefcaseIcon } from "@/assets/icons";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 function Header() {
   return (
-
     <>
-
-<header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-background px-4 sm:px-6">
+      <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-gray-100 px-4 sm:px-6">
         <Link to="#" className="flex items-center gap-2 text-lg font-semibold">
           <BriefcaseIcon className="h-6 w-6" />
           <span>TnP Portal</span>
@@ -41,9 +45,7 @@ function Header() {
           </DropdownMenu>
         </div>
       </header>
-
     </>
-
 
     // <div>
     //   <header className="bg-primary text-primary-foreground py-4 px-6">
