@@ -56,26 +56,26 @@ function Student_Dashboard() {
           </NavLink>
           <NavLink
             to="/"
-            className={({isActive})=>`rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}
+            className={({isActive})=>` hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}
           >
             <BriefcaseIcon className="h-5 w-5" />
             Job Listings
           </NavLink>
           <NavLink
             to="/"
-            className={({isActive})=>`rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}          >
+            className={({isActive})=>`hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}          >
             <CalendarIcon className="h-5 w-5" />
             Interview Schedule
           </NavLink>
           <NavLink
             to="/"
-            className={({isActive})=>`rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}          >
+            className={({isActive})=>`hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}          >
             <CodeIcon className="h-5 w-5" />
             Coding Tests
           </NavLink>
           <NavLink
             to="/"
-            className={({isActive})=>`rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}          >
+            className={({isActive})=>`hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}          >
             <UsersIcon className="h-5 w-5" />
             Placement Statistics
           </NavLink>
