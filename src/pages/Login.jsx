@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { CardFooter } from "@/components/ui/card";
 
 function Login() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [role, setRole] = useState("student");
 
   // const handleSubmit = (e) => {
@@ -28,31 +28,57 @@ function Login() {
     const obj = e.target.elements;
     const email = obj[0].value;
     const password = obj[1].value;
-    console.log(email, password, role);
-
-    try {
-      const response = await fetch("http://localhost:3000/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          role,
-        }),
-      });
-      console.log(response.ok);
-      if (response.ok) {
-        // navigate(`/${role}`); // Redirect to /student or /teacher based on role
-        window.location.href = `/${role}`;
-      } else {
-        const errorData = await response.json();
-        console.log(errorData.message || "Login failed");
+    // console.log(email, password, role);
+    if (!isLogin) {
+      try {
+        const response = await fetch("http://localhost:3000/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            role,
+          }),
+        });
+        console.log(response.ok);
+        if (response.ok) {
+          // navigate(`/${role}`); // Redirect to /student or /teacher based on role
+          window.location.href = `/${role}`;
+        } else {
+          const errorData = await response.json();
+          console.log(errorData.message || "Login failed");
+        }
+      } catch (error) {
+        console.error(error);
+        console.log("Something went wrong. Please try again later.");
       }
-    } catch (error) {
-      console.error(error);
-      console.log("Something went wrong. Please try again later.");
+    } else {
+      try {
+        const response = await fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            role,
+          }),
+        });
+        console.log(response.ok);
+        if (response.ok) {
+          // navigate(`/${role}`); // Redirect to /student or /teacher based on role
+          window.location.href = `/${role}`;
+        } else {
+          const errorData = await response.json();
+          console.log(errorData.message || "Login failed");
+        }
+      } catch (error) {
+        console.error(error);
+        console.log("Something went wrong. Please try again later.");
+      }
     }
   };
 

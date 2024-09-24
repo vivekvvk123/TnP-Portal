@@ -58,6 +58,7 @@ app.post("/signup", (req, res) => {
 
 app.post("/login", (req, res) => {
   const newdata = req.body;
+  console.log(newdata);
   const role = newdata.role;
   const roleKey = `${role}s`;
   const existingData = readDataFromFile();

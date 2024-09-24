@@ -46,6 +46,21 @@
       "email": "chaitanya@gmail.com",
       "password": "saxsa",
       "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "asevew",
+      "role": "student"
+    },
+    {
+      "email": "Chaitanya@gmail.com",
+      "password": "asdf@1234t42",
+      "role": "student"
+    },
+    {
+      "email": "vivek@gmail.com",
+      "password": "12345",
+      "role": "student"
     }
   ],
   "institutes": [
@@ -63,6 +78,21 @@
     {
       "email": "Chaitanya@gmail.com",
       "password": "asacas",
+      "role": "institute"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "asdf@1234",
+      "role": "institute"
+    },
+    {
+      "email": "Chaitanya@gmail.com",
+      "password": "12345",
+      "role": "institute"
+    },
+    {
+      "email": "Chaitanya@gmail.com",
+      "password": "qwerty",
       "role": "institute"
     }
   ],
