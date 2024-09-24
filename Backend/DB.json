@@ -1,0 +1,93 @@
+{
+  "students": [
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "student",
+      "password": "asdf@1234",
+      "studentid": "112116010"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "student",
+      "password": "asdf@1234",
+      "studentid": "112116010"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "student",
+      "password": "asdf@1234"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    }
+  ],
+  "institutes": [
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "institute",
+      "password": "asdf@1234",
+      "studentid": "112116010"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "institute",
+      "password": "asdf@1234"
+    },
+    {
+      "email": "Chaitanya@gmail.com",
+      "password": "asacas",
+      "role": "institute"
+    }
+  ],
+  "companys": [
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "companie",
+      "password": "asdf@1234",
+      "studentid": "112116010"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "company",
+      "password": "asdf@1234",
+      "studentid": "112116010"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "company",
+      "password": "asdf@1234"
+    },
+    {
+      "email": "saxsc@gmail.com",
+      "password": "asxasc",
+      "role": "company"
+    }
+  ]
+}
