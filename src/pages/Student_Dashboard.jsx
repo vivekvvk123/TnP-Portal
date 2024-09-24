@@ -49,85 +49,122 @@ function Student_Dashboard() {
         <nav className="flex flex-col gap-2 bg-background rounded-lg shadow-sm">
           <NavLink
             to="/profile"
-            className={({isActive})=>`rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}
+            className={({ isActive }) =>
+              `rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
           >
             <UserIcon className="h-5 w-5" />
             Profile
           </NavLink>
           <NavLink
             to="/"
-            className={({isActive})=>` hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}
+            className={({ isActive }) =>
+              ` hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
           >
             <BriefcaseIcon className="h-5 w-5" />
             Job Listings
           </NavLink>
           <NavLink
             to="/"
-            className={({isActive})=>`hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}          >
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
             <CalendarIcon className="h-5 w-5" />
             Interview Schedule
           </NavLink>
           <NavLink
             to="/"
-            className={({isActive})=>`hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}          >
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
             <CodeIcon className="h-5 w-5" />
             Coding Tests
           </NavLink>
           <NavLink
             to="/"
-            className={({isActive})=>`hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${isActive ? 'bg-blue-600 text-white' : 'text-black bg-white'}`}          >
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
             <UsersIcon className="h-5 w-5" />
             Placement Statistics
           </NavLink>
         </nav>
         <div className="grid gap-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Card>
-              <CardHeader className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">
-                  Active Job Listings
-                </CardTitle>
-                <BriefcaseIcon className="h-5 w-5 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">24</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">
-                  Pending Applications
-                </CardTitle>
-                <ClipboardListIcon className="h-5 w-5 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">78</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">
-                  Scheduled Interviews
-                </CardTitle>
-                <CalendarIcon className="h-5 w-5 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">12</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">
-                  Placement Rate
-                </CardTitle>
-                <UsersIcon className="h-5 w-5 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">85%</div>
-              </CardContent>
-            </Card>
-          </div>
           <div className="grid gap-4">
+            <Card>
+              <CardHeader className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium">
+                  Upcoming Interviews
+                </CardTitle>
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="search"
+                    placeholder="Search interviews..."
+                    className="w-40 bg-muted rounded-md px-3 py-1 text-sm"
+                  />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Candidate</TableHead>
+                      <TableHead>Job Title</TableHead>
+                      <TableHead>CGPA</TableHead>
+                      <TableHead>Branch</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Time</TableHead>
+                      <TableHead>
+                        <span className="sr-only">Actions</span>
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell className="font-medium">Jane Doe</TableCell>
+                      <TableCell>Software Engineer</TableCell>
+                      <TableCell>8.5</TableCell>
+                      <TableCell>Computer Science</TableCell>
+                      <TableCell>2023-06-25</TableCell>
+                      <TableCell>10:00 AM</TableCell>
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              aria-haspopup="true"
+                              size="icon"
+                              variant="ghost"
+                            >
+                              <DotIcon className="h-4 w-4" />
+                              <span className="sr-only">Toggle menu</span>
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem>Start Interview</DropdownMenuItem>
+                            <DropdownMenuItem>Reschedule</DropdownMenuItem>
+                            <DropdownMenuItem>Cancel</DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
             <Card>
               <CardHeader className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium">
@@ -337,66 +374,6 @@ function Student_Dashboard() {
                             <DropdownMenuItem>
                               Withdraw Application
                             </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">
-                  Upcoming Interviews
-                </CardTitle>
-                <div className="flex items-center gap-2">
-                  <Input
-                    type="search"
-                    placeholder="Search interviews..."
-                    className="w-40 bg-muted rounded-md px-3 py-1 text-sm"
-                  />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Candidate</TableHead>
-                      <TableHead>Job Title</TableHead>
-                      <TableHead>CGPA</TableHead>
-                      <TableHead>Branch</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Time</TableHead>
-                      <TableHead>
-                        <span className="sr-only">Actions</span>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell className="font-medium">Jane Doe</TableCell>
-                      <TableCell>Software Engineer</TableCell>
-                      <TableCell>8.5</TableCell>
-                      <TableCell>Computer Science</TableCell>
-                      <TableCell>2023-06-25</TableCell>
-                      <TableCell>10:00 AM</TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <DotIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>Start Interview</DropdownMenuItem>
-                            <DropdownMenuItem>Reschedule</DropdownMenuItem>
-                            <DropdownMenuItem>Cancel</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>
