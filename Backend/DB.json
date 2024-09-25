@@ -1,0 +1,152 @@
+{
+  "students": [
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "student",
+      "password": "asdf@1234",
+      "studentid": "112116010"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "student",
+      "password": "asdf@1234",
+      "studentid": "112116010"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "student",
+      "password": "asdf@1234"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "saxsa",
+      "role": "student"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "asevew",
+      "role": "student"
+    },
+    {
+      "email": "Chaitanya@gmail.com",
+      "password": "asdf@1234t42",
+      "role": "student"
+    },
+    {
+      "email": "vivek@gmail.com",
+      "password": "12345",
+      "role": "student"
+    }
+  ],
+  "institutes": [
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "institute",
+      "password": "asdf@1234",
+      "studentid": "112116010"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "institute",
+      "password": "asdf@1234"
+    },
+    {
+      "email": "Chaitanya@gmail.com",
+      "password": "asacas",
+      "role": "institute"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "password": "asdf@1234",
+      "role": "institute"
+    },
+    {
+      "email": "Chaitanya@gmail.com",
+      "password": "12345",
+      "role": "institute"
+    },
+    {
+      "email": "Chaitanya@gmail.com",
+      "password": "qwerty",
+      "role": "institute"
+    }
+  ],
+  "companys": [
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "companie",
+      "password": "asdf@1234",
+      "studentid": "112116010"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "company",
+      "password": "asdf@1234",
+      "studentid": "112116010"
+    },
+    {
+      "email": "chaitanya@gmail.com",
+      "role": "company",
+      "password": "asdf@1234"
+    },
+    {
+      "email": "saxsc@gmail.com",
+      "password": "asxasc",
+      "role": "company"
+    }
+  ],
+  "activeJobs": [
+    {
+      "title": "SDET",
+      "company": "Accolite",
+      "cgpa": "7.0",
+      "branch": "ECE",
+      "Package": "25LPA",
+      "deadline": "2024-09-26",
+      "applications": 0
+    },
+    {
+      "title": "SDE Intern",
+      "company": "OpenAI",
+      "cgpa": "7.0",
+      "branch": "ECE",
+      "Package": "55 LPA",
+      "deadline": "2024-09-27",
+      "applications": 0
+    },
+    {
+      "title": "UI/UX Designer",
+      "company": "Adobe",
+      "cgpa": "7.15",
+      "branch": "ECE",
+      "Package": "55 LPA",
+      "deadline": "2024-10-02",
+      "applications": 0
+    }
+  ]
+}

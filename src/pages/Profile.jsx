@@ -85,6 +85,14 @@ function Profile() {
             <UsersIcon className="h-5 w-5" />
             Placement Statistics
           </Link>
+          <Link
+            to="/student/referral"
+            className="flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
+            
+          >
+            <UsersIcon className="h-5 w-5" />
+            Referral Support
+          </Link>
         </nav>
         <div className="grid gap-4">
           <Card>
