@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -29,8 +30,70 @@ import {
   PlusIcon,
   UsersIcon,
 } from "@/assets/icons";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label"
 
 function TPO_Dashboard() {
+  const [jobs, setJobs] = React.useState([]);
+
+  useEffect(() => {
+    fetch("/../../Backend/DB.json")
+      .then((response) => response.json())
+      .then((data) => setJobs(data["activeJobs"]))
+      .catch((error) => console.error("Error fetching jobs:", error));
+  }, []);
+
+  const [isJobPostingOpen, setIsJobPostingOpen] = useState(false);
+  const [jobData, setJobData] = useState({
+    title: "",
+    company: "",
+    cgpa: "",
+    branch: "",
+    Package: "",
+    deadline: "",
+    applications: 0,
+  });
+
+  const handlePost = async () => {
+    console.log(JSON.stringify(jobData));
+    try {
+      const response = await fetch("http://localhost:3000/job", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jobData),
+      });
+      console.log(response.ok);
+      if (response.ok) {
+      } else {
+        const errorData = await response.json();
+        console.log(errorData.message || "Job Posting failed");
+      }
+    } catch (error) {
+      console.error(error);
+      console.log("Something went wrong. Please try again later.");
+    }
+    setJobData({
+      title: "",
+      company: "",
+      cgpa: "",
+      branch: "",
+      Package: "",
+      deadline: "",
+      applications: 0,
+    });
+    setIsJobPostingOpen(false);
+  };
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
       <main className="flex-1 grid grid-cols-[250px_1fr] gap-4 p-4 sm:p-6">
@@ -139,7 +202,11 @@ function TPO_Dashboard() {
                   Job Listings
                 </CardTitle>
                 <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm">
+                  <Button
+                    onClick={() => setIsJobPostingOpen(true)}
+                    variant="outline"
+                    size="sm"
+                  >
                     <PlusIcon className="h-4 w-4" />
                     Post New Job
                   </Button>
@@ -161,12 +228,14 @@ function TPO_Dashboard() {
                       <TableHead>Package</TableHead>
                       <TableHead>Deadline</TableHead>
                       <TableHead>Applications</TableHead>
+                      <TableHead>Actions</TableHead>
+
                       <TableHead>
                         <span className="sr-only">Actions</span>
                       </TableHead>
                     </TableRow>
                   </TableHeader>
-                  <TableBody>
+                  {/* <TableBody>
                     <TableRow>
                       <TableCell className="font-medium">
                         Software Engineer
@@ -266,6 +335,45 @@ function TPO_Dashboard() {
                         </DropdownMenu>
                       </TableCell>
                     </TableRow>
+                  </TableBody> */}
+                  <TableBody>
+                    {jobs.map((job, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">
+                          {job.title}
+                        </TableCell>
+                        <TableCell>{job.company}</TableCell>
+                        <TableCell>{job.cgpa}</TableCell>
+                        <TableCell>{job.branch}</TableCell>
+                        <TableCell>{job.Package}</TableCell>
+                        <TableCell>{job.deadline}</TableCell>
+                        <TableCell>{job.applications}</TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <DotIcon className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem>
+                                View Applicants
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                Schedule Interviews
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>Edit Job</DropdownMenuItem>
+                              <DropdownMenuItem>Close Job</DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </CardContent>
@@ -403,6 +511,91 @@ function TPO_Dashboard() {
           </div>
         </div>
       </main>
+      <Dialog open={isJobPostingOpen} onOpenChange={setIsJobPostingOpen}>
+        <DialogContent className="sm:max-w-[700px]">
+          <DialogHeader>
+            <DialogTitle>Post a new Job</DialogTitle>
+            <DialogDescription>Manage job posting details.</DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="jobTitle">Job Title</Label>
+                <Input
+                  id="jobTitle"
+                  value={jobData.title}
+                  onChange={(e) =>
+                    setJobData({ ...jobData, title: e.target.value })
+                  }
+                  placeholder="eg. SDE, Data Analyst etc"
+                />
+              </div>
+              <div>
+                <Label htmlFor="company">Company</Label>
+                <Input
+                  id="company"
+                  value={jobData.company}
+                  onChange={(e) =>
+                    setJobData({ ...jobData, company: e.target.value })
+                  }
+                  placeholder=" eg. Flipkart, Amazon etc"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="cgpa">CGPA</Label>
+                <Input
+                  id="cgpa"
+                  value={jobData.cgpa}
+                  onChange={(e) =>
+                    setJobData({ ...jobData, cgpa: e.target.value })
+                  }
+                  placeholder="eg. 7.0, 7.5 etc "
+                />
+              </div>
+              <div>
+                <Label htmlFor="branch">Branch</Label>
+                <Input
+                  id="branch"
+                  value={jobData.branch}
+                  onChange={(e) =>
+                    setJobData({ ...jobData, branch: e.target.value })
+                  }
+                  placeholder="eg. ECE, CSE"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="package">Package</Label>
+                <Input
+                  id="package"
+                  value={jobData.Package}
+                  onChange={(e) =>
+                    setJobData({ ...jobData, Package: e.target.value })
+                  }
+                  placeholder="eg. 15 LPA, 20 LPA etc"
+                />
+              </div>
+              <div>
+                <Label htmlFor="deadline">Deadline</Label>
+                <Input
+                  id="deadline"
+                  value={jobData.deadline}
+                  onChange={(e) =>
+                    setJobData({ ...jobData, deadline: e.target.value })
+                  }
+                  type="date"
+                />
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button onClick={handlePost}>Post</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

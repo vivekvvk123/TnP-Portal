@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/tpo",
+        path: "/institute",
         element: <TPO_Dashboard />,
       },
       {
