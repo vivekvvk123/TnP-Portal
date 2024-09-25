@@ -86,6 +86,7 @@ const Referral = () => {
             <UsersIcon className="h-5 w-5" />
             Placement Statistics
           </Link>
+
           <Link
             to="/student/referral"
             className="flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
@@ -93,6 +94,7 @@ const Referral = () => {
             <UsersIcon className="h-5 w-5" />
             Referral Support
           </Link>
+
         </nav>
         <form onSubmit={sendEmail}>
           <div className="grid gap-4">
@@ -182,11 +184,13 @@ const Referral = () => {
                 </div>
               </CardContent>
 
+
               <div className="flex justify-center p-5">
                 <Button type="submit" name="submit">
                   Submit Request
                 </Button>
               </div>
+
             </Card>
           </div>
         </form>

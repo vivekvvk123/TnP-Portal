@@ -113,6 +113,7 @@ function Student_Dashboard() {
             Placement Statistics
           </NavLink>
           <NavLink
+
             to="/interview-preparation"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
@@ -125,6 +126,7 @@ function Student_Dashboard() {
           </NavLink>
           <NavLink
             to="/student/referral"
+
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
