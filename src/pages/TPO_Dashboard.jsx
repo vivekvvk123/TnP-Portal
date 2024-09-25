@@ -39,7 +39,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/components/ui/label"
 
 function TPO_Dashboard() {
   const [jobs, setJobs] = React.useState([]);
@@ -497,7 +497,6 @@ function TPO_Dashboard() {
           </div>
         </div>
       </main>
-
       <Dialog open={isJobPostingOpen} onOpenChange={setIsJobPostingOpen}>
         <DialogContent className="sm:max-w-[700px]">
           <DialogHeader>

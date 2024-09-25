@@ -6,6 +6,7 @@ import TPO_Dashboard from "./pages/TPO_Dashboard";
 import Login from "./pages/Login";
 import Student_Dashboard from "./pages/Student_Dashboard";
 import Profile from "./pages/Profile";
+import Referral from "./pages/Referral";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/referral",
+        element: <Referral />,
       },
     ],
   },
