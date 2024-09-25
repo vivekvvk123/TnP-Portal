@@ -48,7 +48,7 @@ function Student_Dashboard() {
       <main className="flex-1 grid grid-cols-[250px_1fr] gap-4 p-4 sm:p-6">
         <nav className="flex flex-col gap-2 bg-background rounded-lg shadow-sm">
           <NavLink
-            to="/profile"
+            to="/student/profile"
             className={({ isActive }) =>
               `rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -59,7 +59,7 @@ function Student_Dashboard() {
             Profile
           </NavLink>
           <NavLink
-            to="/"
+            to="/student/joblisting"
             className={({ isActive }) =>
               ` hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -92,7 +92,7 @@ function Student_Dashboard() {
             Coding Tests
           </NavLink>
           <NavLink
-            to="/"
+            to="/placement-statistics"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -103,7 +103,18 @@ function Student_Dashboard() {
             Placement Statistics
           </NavLink>
           <NavLink
-            to="/"
+            to="/interview-preparation"
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
+            <UsersIcon className="h-5 w-5" />
+            Interview Preparation
+          </NavLink>
+          <NavLink
+            to="/student/referral"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -176,88 +187,7 @@ function Student_Dashboard() {
                 </Table>
               </CardContent>
             </Card>
-            <Card>
-              <CardHeader className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">
-                  Job Listings
-                </CardTitle>
-                <div className="flex items-center gap-2">
-                  <Input
-                    type="search"
-                    placeholder="Search jobs..."
-                    className="w-40 bg-muted rounded-md px-3 py-1 text-sm"
-                  />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Job Title</TableHead>
-                      <TableHead>Company</TableHead>
-                      <TableHead>CGPA</TableHead>
-                      <TableHead>Branch</TableHead>
-                      <TableHead>Package</TableHead>
-                      <TableHead>Deadline</TableHead>
-                      <TableHead>Applications</TableHead>
-                      <TableHead>
-                        <span className="sr-only">Actions</span>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        Software Engineer
-                      </TableCell>
-                      <TableCell>Acme Inc.</TableCell>
-                      <TableCell>8.5</TableCell>
-                      <TableCell>Computer Science</TableCell>
-                      <TableCell>₹30 LPA</TableCell>
-                      <TableCell>2024-09-30</TableCell>
-                      <TableCell>42</TableCell>
-                      <TableCell>
-                        <Button variant="outline" size="sm">
-                          Apply
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        UI/UX Designer
-                      </TableCell>
-                      <TableCell>Globex Corp.</TableCell>
-                      <TableCell>8.0</TableCell>
-                      <TableCell>Computer Science</TableCell>
-                      <TableCell>₹25 LPA</TableCell>
-                      <TableCell>2024-07-15</TableCell>
-                      <TableCell>18</TableCell>
-                      <TableCell>
-                        <Button variant="outline" size="sm">
-                          Apply
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        Data Analyst
-                      </TableCell>
-                      <TableCell>Stark Industries</TableCell>
-                      <TableCell>7.5</TableCell>
-                      <TableCell>Statistics</TableCell>
-                      <TableCell>₹20 LPA</TableCell>
-                      <TableCell>2024-09-01</TableCell>
-                      <TableCell>29</TableCell>
-                      <TableCell>
-                        <Button variant="outline" size="sm">
-                          Apply
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
+
             <Card>
               <CardHeader className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium">
