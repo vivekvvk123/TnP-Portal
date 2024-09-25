@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import { Link, NavLink } from "react-router-dom";
 import {
@@ -43,6 +44,15 @@ import {
 } from "@/components/ui/dialog";
 
 function Student_Dashboard() {
+  const [jobs, setJobs] = React.useState([]);
+
+  useEffect(() => {
+    fetch("/../../Backend/DB.json")
+      .then((response) => response.json())
+      .then((data) => setJobs(data["activeJobs"]))
+      .catch((error) => console.error("Error fetching jobs:", error));
+  }, []);
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
       <main className="flex-1 grid grid-cols-[250px_1fr] gap-4 p-4 sm:p-6">
@@ -162,6 +172,26 @@ function Student_Dashboard() {
                       </TableCell>
                     </TableRow>
                   </TableBody>
+                  {/* <TableBody>
+                    {jobs.map((job, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">
+                          {job.jobTitle}
+                        </TableCell>
+                        <TableCell>{job.company}</TableCell>
+                        <TableCell>{job.cgpa}</TableCell>
+                        <TableCell>{job.branch}</TableCell>
+                        <TableCell>{job.package}</TableCell>
+                        <TableCell>{job.deadline}</TableCell>
+                        <TableCell>{job.applications}</TableCell>
+                        <TableCell>
+                          <Button variant="outline" size="sm">
+                            Apply
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody> */}
                 </Table>
               </CardContent>
             </Card>
@@ -194,7 +224,7 @@ function Student_Dashboard() {
                       </TableHead>
                     </TableRow>
                   </TableHeader>
-                  <TableBody>
+                  {/* <TableBody>
                     <TableRow>
                       <TableCell className="font-medium">
                         Software Engineer
@@ -243,6 +273,26 @@ function Student_Dashboard() {
                         </Button>
                       </TableCell>
                     </TableRow>
+                  </TableBody> */}
+                  <TableBody>
+                    {jobs.map((job, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">
+                          {job.title}
+                        </TableCell>
+                        <TableCell>{job.company}</TableCell>
+                        <TableCell>{job.cgpa}</TableCell>
+                        <TableCell>{job.branch}</TableCell>
+                        <TableCell>{job.Package}</TableCell>
+                        <TableCell>{job.deadline}</TableCell>
+                        <TableCell>{job.applications}</TableCell>
+                        <TableCell>
+                          <Button variant="outline" size="sm">
+                            Apply
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </CardContent>

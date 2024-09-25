@@ -138,6 +138,15 @@
       "Package": "55 LPA",
       "deadline": "2024-09-27",
       "applications": 0
+    },
+    {
+      "title": "UI/UX Designer",
+      "company": "Adobe",
+      "cgpa": "7.15",
+      "branch": "ECE",
+      "Package": "55 LPA",
+      "deadline": "2024-10-02",
+      "applications": 0
     }
   ]
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -42,6 +42,15 @@ import {
 import { Label } from "@/components/ui/label";
 
 function TPO_Dashboard() {
+  const [jobs, setJobs] = React.useState([]);
+
+  useEffect(() => {
+    fetch("/../../Backend/DB.json")
+      .then((response) => response.json())
+      .then((data) => setJobs(data["activeJobs"]))
+      .catch((error) => console.error("Error fetching jobs:", error));
+  }, []);
+
   const [isJobPostingOpen, setIsJobPostingOpen] = useState(false);
   const [jobData, setJobData] = useState({
     title: "",
@@ -212,7 +221,7 @@ function TPO_Dashboard() {
                       </TableHead>
                     </TableRow>
                   </TableHeader>
-                  <TableBody>
+                  {/* <TableBody>
                     <TableRow>
                       <TableCell className="font-medium">
                         Software Engineer
@@ -312,6 +321,45 @@ function TPO_Dashboard() {
                         </DropdownMenu>
                       </TableCell>
                     </TableRow>
+                  </TableBody> */}
+                  <TableBody>
+                    {jobs.map((job, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">
+                          {job.title}
+                        </TableCell>
+                        <TableCell>{job.company}</TableCell>
+                        <TableCell>{job.cgpa}</TableCell>
+                        <TableCell>{job.branch}</TableCell>
+                        <TableCell>{job.Package}</TableCell>
+                        <TableCell>{job.deadline}</TableCell>
+                        <TableCell>{job.applications}</TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <DotIcon className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem>
+                                View Applicants
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                Schedule Interviews
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>Edit Job</DropdownMenuItem>
+                              <DropdownMenuItem>Close Job</DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </CardContent>
