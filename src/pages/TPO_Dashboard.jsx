@@ -127,11 +127,25 @@ function TPO_Dashboard() {
             Coding Tests
           </Link>
           <Link
-            to="#"
+            to="/placement-statistics"
             className="flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
           >
             <UsersIcon className="h-5 w-5" />
             Placement Statistics
+          </Link>
+          <Link
+            to="/recruiter-feedback"
+            className="flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
+          >
+            <UsersIcon className="h-5 w-5" />
+            Recruiter Feedback
+          </Link>
+          <Link
+            to="/student-feedback"
+            className="flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
+          >
+            <UsersIcon className="h-5 w-5" />
+            Student Feedback
           </Link>
         </nav>
         <div className="grid gap-4">

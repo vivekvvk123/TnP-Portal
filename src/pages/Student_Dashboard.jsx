@@ -58,7 +58,7 @@ function Student_Dashboard() {
       <main className="flex-1 grid grid-cols-[250px_1fr] gap-4 p-4 sm:p-6">
         <nav className="flex flex-col gap-2 bg-background rounded-lg shadow-sm">
           <NavLink
-            to="/profile"
+            to="/student/profile"
             className={({ isActive }) =>
               `rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -69,7 +69,7 @@ function Student_Dashboard() {
             Profile
           </NavLink>
           <NavLink
-            to="/"
+            to="/student/joblisting"
             className={({ isActive }) =>
               ` hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -102,7 +102,7 @@ function Student_Dashboard() {
             Coding Tests
           </NavLink>
           <NavLink
-            to="/"
+            to="/placement-statistics"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -113,7 +113,18 @@ function Student_Dashboard() {
             Placement Statistics
           </NavLink>
           <NavLink
-            to="/"
+            to="/interview-preparation"
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
+            <UsersIcon className="h-5 w-5" />
+            Interview Preparation
+          </NavLink>
+          <NavLink
+            to="/student/referral"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -206,6 +217,7 @@ function Student_Dashboard() {
                 </Table>
               </CardContent>
             </Card>
+
             <Card>
               <CardHeader className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium">
@@ -308,6 +320,7 @@ function Student_Dashboard() {
                 </Table>
               </CardContent>
             </Card>
+
             <Card>
               <CardHeader className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium">

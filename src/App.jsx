@@ -7,6 +7,13 @@ import Login from "./pages/Login";
 import Student_Dashboard from "./pages/Student_Dashboard";
 import Profile from "./pages/Profile";
 import Referral from "./pages/Referral";
+import JobListing from "./pages/JobListing";
+import PlacementStatistics from "./pages/student/PlacementStatistics";
+import RecruiterFeedback from "./pages/tpo/RecruiterFeedback";
+import StudentFeedback from "./pages/tpo/StudentFeedback";
+import InterviewPreparation from "./pages/student/InterviewPreparation";
+import Home from "./pages/Home";
+
 
 const router = createBrowserRouter([
   {
@@ -18,6 +25,10 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path:'/home',
+        element: <Home />,
+      },
+      {
         path: "/institute",
         element: <TPO_Dashboard />,
       },
@@ -26,15 +37,36 @@ const router = createBrowserRouter([
         element: <Student_Dashboard />,
       },
       {
-        path: "/profile",
+        path: "/student/profile",
         element: <Profile />,
       },
+      {
+        path:"/student/joblisting",
+        element: <JobListing />,
+      },
+      {
+        path:"placement-statistics",
+        element: <PlacementStatistics />,
+      },
+      {
+        path:"recruiter-feedback",
+        element: <RecruiterFeedback />,
+      },
+      {
+        path:"student-feedback",
+        element: <StudentFeedback />,
+      },
+      {
+        path:"interview-preparation",
+        element: <InterviewPreparation />,
+      },
+
       {
         path: "/about",
         element: <About />,
       },
       {
-        path: "/referral",
+        path: "/student/referral",
         element: <Referral />,
       },
     ],
