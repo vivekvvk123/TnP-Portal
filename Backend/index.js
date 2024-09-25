@@ -48,12 +48,25 @@ app.post("/signup", (req, res) => {
   const role = newdata.role;
   const roleKey = `${role}s`;
   const existingData = readDataFromFile();
-  // console.log(existingData);
+
+  console.log(existingData);
   existingData[roleKey].push(newdata);
   //   console.log(req.body);
   writeDataToFile(existingData);
 
   res.status(201).json({ message: "User signed up successfully", role });
+});
+
+app.post("/job", (req, res) => {
+  const newdata = req.body;
+  console.log(newdata);
+  const existingData = readDataFromFile();
+  // console.log(existingData);
+  existingData["activeJobs"].push(newdata);
+  //   console.log(req.body);
+  writeDataToFile(existingData);
+
+  res.status(201).json({ message: "Job posted successfully" });
 });
 
 app.post("/login", (req, res) => {

@@ -48,25 +48,42 @@ function TPO_Dashboard() {
     company: "",
     cgpa: "",
     branch: "",
-    package: "",
+    Package: "",
     deadline: "",
     applications: 0,
   });
 
-  const handlePost = () => {
-    console.log(jobData);
+  const handlePost = async () => {
+    console.log(JSON.stringify(jobData));
+    try {
+      const response = await fetch("http://localhost:3000/job", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jobData),
+      });
+      console.log(response.ok);
+      if (response.ok) {
+      } else {
+        const errorData = await response.json();
+        console.log(errorData.message || "Job Posting failed");
+      }
+    } catch (error) {
+      console.error(error);
+      console.log("Something went wrong. Please try again later.");
+    }
     setJobData({
       title: "",
       company: "",
       cgpa: "",
       branch: "",
-      package: "",
+      Package: "",
       deadline: "",
       applications: 0,
     });
     setIsJobPostingOpen(false);
-  }
-
+  };
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
@@ -493,9 +510,9 @@ function TPO_Dashboard() {
                 <Label htmlFor="package">Package</Label>
                 <Input
                   id="package"
-                  value={jobData.package}
+                  value={jobData.Package}
                   onChange={(e) =>
-                    setJobData({ ...jobData, package: e.target.value })
+                    setJobData({ ...jobData, Package: e.target.value })
                   }
                   placeholder="eg. 15 LPA, 20 LPA etc"
                 />

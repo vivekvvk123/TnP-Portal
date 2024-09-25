@@ -119,5 +119,25 @@
       "password": "asxasc",
       "role": "company"
     }
+  ],
+  "activeJobs": [
+    {
+      "title": "SDET",
+      "company": "Accolite",
+      "cgpa": "7.0",
+      "branch": "ECE",
+      "Package": "25LPA",
+      "deadline": "2024-09-26",
+      "applications": 0
+    },
+    {
+      "title": "SDE Intern",
+      "company": "OpenAI",
+      "cgpa": "7.0",
+      "branch": "ECE",
+      "Package": "55 LPA",
+      "deadline": "2024-09-27",
+      "applications": 0
+    }
   ]
 }
