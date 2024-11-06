@@ -6,6 +6,7 @@ const app = express();
 const port = 3000;
 const cors = require("cors");
 const exp = require("constants");
+const nodemailer = require("nodemailer");
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,6 +41,40 @@ app.get("/", (req, res) => {
 
 app.get("/signup", (req, res) => {
   res.send("signup page is working");
+});
+
+// Nodemailer transporter setup
+const transporter = nodemailer.createTransport({
+  service: "gmail", // use "gmail" or any other supported email service
+  auth: {
+    user: "srijanraha595@gmail.com", // Replace with your email
+    pass: "eytd dqex edlz dlnn",  // Replace with your email password or app-specific password
+  },
+});
+
+// Routes
+app.get("/", (req, res) => {
+  res.send("Backend server Up!");
+});
+
+// Endpoint to send email
+app.post("/send-email", async (req, res) => {
+  const { email, title, date } = req.body;
+
+  const mailOptions = {
+    from: "abcd", // Sender address
+    to: email, // Recipient address
+    subject: `Reminder for Event: ${title}`,
+    text: `You have an upcoming event: ${title} scheduled for ${new Date(date).toLocaleString()}.`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Email sent successfully" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ message: "Failed to send email" });
+  }
 });
 
 app.post("/signup", (req, res) => {

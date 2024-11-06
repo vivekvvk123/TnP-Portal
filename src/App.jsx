@@ -13,7 +13,9 @@ import RecruiterFeedback from "./pages/tpo/RecruiterFeedback";
 import StudentFeedback from "./pages/tpo/StudentFeedback";
 import InterviewPreparation from "./pages/student/InterviewPreparation";
 import Home from "./pages/Home";
-
+import ResumeBuilder from "./pages/student/ResumeBuilder";
+import Scheduler from "./pages/student/Scheduler";
+import Interview_Schedule from "./pages/Interview_Schedule";
 
 const router = createBrowserRouter([
   {
@@ -22,11 +24,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Login />,
+        element: <Home />,
       },
       {
-        path:'/home',
-        element: <Home />,
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/institute",
@@ -36,28 +38,38 @@ const router = createBrowserRouter([
         path: "/student",
         element: <Student_Dashboard />,
       },
+
       {
         path: "/student/profile",
         element: <Profile />,
       },
       {
-        path:"/student/joblisting",
+        path: "joblisting",
         element: <JobListing />,
       },
       {
-        path:"placement-statistics",
+        path: "student/interview-schedule",
+        element: <Interview_Schedule />,
+      },
+      {
+        path: "placement-statistics",
         element: <PlacementStatistics />,
       },
       {
-        path:"recruiter-feedback",
+        path: "recruiter-feedback",
         element: <RecruiterFeedback />,
       },
       {
-        path:"student-feedback",
+        path: "student/referral",
+        element: <Referral />,
+      },
+
+      {
+        path: "student-feedback",
         element: <StudentFeedback />,
       },
       {
-        path:"interview-preparation",
+        path: "interview-preparation",
         element: <InterviewPreparation />,
       },
 
@@ -66,9 +78,14 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: "/student/referral",
-        element: <Referral />,
+        path: "student/resume-builder",
+        element: <ResumeBuilder/>,
       },
+      { path: "student/scheduler",
+        element: <Scheduler/>,
+
+      },
+
     ],
   },
 ]);

@@ -16,35 +16,7 @@ export default function Home() {
   return (
     <div className="">
       <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"><div class="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-fuchsia-400 opacity-20 blur-[100px]"></div></div>
-      <header className="py-4 px-8 bg-white shadow-sm">
-        <div className="container mx-auto flex items-center justify-between">
-          <a href="/" className="text-2xl font-bold text-blue-600">  
-            <span className="font-extrabold">P</span>lacify
-          </a>
-          <nav>
-            <ul className="flex space-x-6">
-              <li>
-                <a href="/" className="text-gray-800 hover:text-blue-600">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="/about" className="text-gray-800 hover:text-blue-600">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/contact"
-                  className="text-gray-800 hover:text-blue-600"
-                >
-                  Contact Us
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+      
 
       <section className="container mx-auto py-16 px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex flex-col justify-center">
@@ -57,10 +29,10 @@ export default function Home() {
           </p>
           <div className="flex space-x-4 mt-10">
             <a
-              href="/"
+              href="/login"
               className="bg-orange-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
             >
-              Learn More
+              Join Us
             </a>
             <a
               href="/contact"

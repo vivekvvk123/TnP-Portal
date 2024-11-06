@@ -43,6 +43,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+
 function Student_Dashboard() {
   const [jobs, setJobs] = useState([]);
   const [appliedJobs, setAppliedJobs] = useState({});
@@ -101,7 +102,7 @@ function Student_Dashboard() {
             Job Listings
           </NavLink>
           <NavLink
-            to="/"
+            to="/student/interview-schedule"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -145,7 +146,7 @@ function Student_Dashboard() {
             Interview Preparation
           </NavLink>
           <NavLink
-            to="/student/referral"
+            to="referral"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -155,90 +156,32 @@ function Student_Dashboard() {
             <UsersIcon className="h-5 w-5" />
             Referral Support
           </NavLink>
+          <NavLink
+            to="/student/resume-builder"
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
+            <UsersIcon className="h-5 w-5" />
+            Resume Builder
+          </NavLink>
+          <NavLink
+            to="/student/scheduler"
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
+            <UsersIcon className="h-5 w-5" />
+            Scheduler
+          </NavLink>
         </nav>
         <div className="grid gap-4">
           <div className="grid gap-4">
-            <Card>
-              <CardHeader className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">
-                  Upcoming Interviews
-                </CardTitle>
-                <div className="flex items-center gap-2">
-                  <Input
-                    type="search"
-                    placeholder="Search interviews..."
-                    className="w-40 bg-muted rounded-md px-3 py-1 text-sm"
-                  />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Candidate</TableHead>
-                      <TableHead>Job Title</TableHead>
-                      <TableHead>CGPA</TableHead>
-                      <TableHead>Branch</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Time</TableHead>
-                      <TableHead>
-                        <span className="sr-only">Actions</span>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell className="font-medium">Jane Doe</TableCell>
-                      <TableCell>Software Engineer</TableCell>
-                      <TableCell>8.5</TableCell>
-                      <TableCell>Computer Science</TableCell>
-                      <TableCell>2023-06-25</TableCell>
-                      <TableCell>10:00 AM</TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <DotIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>Start Interview</DropdownMenuItem>
-                            <DropdownMenuItem>Reschedule</DropdownMenuItem>
-                            <DropdownMenuItem>Cancel</DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                  {/* <TableBody>
-                    {jobs.map((job, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="font-medium">
-                          {job.jobTitle}
-                        </TableCell>
-                        <TableCell>{job.company}</TableCell>
-                        <TableCell>{job.cgpa}</TableCell>
-                        <TableCell>{job.branch}</TableCell>
-                        <TableCell>{job.package}</TableCell>
-                        <TableCell>{job.deadline}</TableCell>
-                        <TableCell>{job.applications}</TableCell>
-                        <TableCell>
-                          <Button variant="outline" size="sm">
-                            Apply
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody> */}
-                </Table>
-              </CardContent>
-            </Card>
-
+            
             <Card>
               <CardHeader className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium">

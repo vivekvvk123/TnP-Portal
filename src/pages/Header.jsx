@@ -17,9 +17,11 @@ function Header() {
       <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-gray-100 px-4 sm:px-6">
         <Link to="#" className="flex items-center gap-2 text-lg font-semibold">
           <BriefcaseIcon className="h-6 w-6" />
-          <span>TnP Portal</span>
+          <a href="/" className="text-2xl font-bold text-blue-600">  
+            <span className="font-extrabold"></span>Placify
+          </a>
         </Link>
-        <div className="flex items-center gap-4">
+        {/* <div className="flex items-center gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="rounded-full">
@@ -43,7 +45,7 @@ function Header() {
               <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
+        </div> */}
       </header>
     </>
 
