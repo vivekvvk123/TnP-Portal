@@ -229,7 +229,195 @@ function Student_Dashboard() {
             Scheduler
           </NavLink>
         </nav>
-        {/* Rest of the component */}
+        <div className="grid gap-4">
+          <div className="grid gap-4">
+            <Card>
+              <CardHeader className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium">
+                  Job Listings
+                </CardTitle>
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="search"
+                    placeholder="Search jobs..."
+                    className="w-40 bg-muted rounded-md px-3 py-1 text-sm"
+                  />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Job Title</TableHead>
+                      <TableHead>Company</TableHead>
+                      <TableHead>CGPA</TableHead>
+                      <TableHead>Branch</TableHead>
+                      <TableHead>Package</TableHead>
+                      <TableHead>Deadline</TableHead>
+                      <TableHead>Applications</TableHead>
+                      <TableHead>
+                        <span className="sr-only">Actions</span>
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  {/* <TableBody>
+                    <TableRow>
+                      <TableCell className="font-medium">
+                        Software Engineer
+                      </TableCell>
+                      <TableCell>Acme Inc.</TableCell>
+                      <TableCell>8.5</TableCell>
+                      <TableCell>Computer Science</TableCell>
+                      <TableCell>₹30 LPA</TableCell>
+                      <TableCell>2024-09-30</TableCell>
+                      <TableCell>42</TableCell>
+                      <TableCell>
+                        <Button variant="outline" size="sm">
+                          Apply
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">
+                        UI/UX Designer
+                      </TableCell>
+                      <TableCell>Globex Corp.</TableCell>
+                      <TableCell>8.0</TableCell>
+                      <TableCell>Computer Science</TableCell>
+                      <TableCell>₹25 LPA</TableCell>
+                      <TableCell>2024-07-15</TableCell>
+                      <TableCell>18</TableCell>
+                      <TableCell>
+                        <Button variant="outline" size="sm">
+                          Apply
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">
+                        Data Analyst
+                      </TableCell>
+                      <TableCell>Stark Industries</TableCell>
+                      <TableCell>7.5</TableCell>
+                      <TableCell>Statistics</TableCell>
+                      <TableCell>₹20 LPA</TableCell>
+                      <TableCell>2024-09-01</TableCell>
+                      <TableCell>29</TableCell>
+                      <TableCell>
+                        <Button variant="outline" size="sm">
+                          Apply
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody> */}
+                  <TableBody>
+                    {jobs.map((job) => (
+                      <TableRow key={job.job_id}>
+                        <TableCell className="font-medium">
+                          {job.title}
+                        </TableCell>
+                        <TableCell>{job.company}</TableCell>
+                        <TableCell>{job.cgpa}</TableCell>
+                        <TableCell>{job.branch}</TableCell>
+                        <TableCell>{job.Package}</TableCell>
+                        <TableCell>{job.deadline}</TableCell>
+                        <TableCell>{job.applications}</TableCell>
+                        <TableCell>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleApplied(job.job_id)}
+                            disabled={appliedJobs[job.job_id]}
+                          >
+                            {appliedJobs[job.job_id] ? "Applied" : "Apply"}
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="flex items-center justify-between">
+                <CardTitle className="text-sm font-medium">
+                  Your Applications
+                </CardTitle>
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="search"
+                    placeholder="Search your applications..."
+                    className="w-40 bg-muted rounded-md px-3 py-1 text-sm"
+                  />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Job Title</TableHead>
+                      <TableHead>Company</TableHead>
+                      <TableHead>CGPA</TableHead>
+                      <TableHead>Branch</TableHead>
+                      <TableHead>Package</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>
+                        <span className="sr-only">Actions</span>
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {appliedJobList.map((job) => (
+                      <TableRow key={job.job_id}>
+                        <TableCell className="font-medium">
+                          {job.title}
+                        </TableCell>
+                        <TableCell>{job.company}</TableCell>
+                        <TableCell>{job.cgpa}</TableCell>
+                        <TableCell>{job.branch}</TableCell>
+                        <TableCell>{job.Package}</TableCell>
+                        <TableCell>
+                          <Badge variant="secondary">Pending</Badge>
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <DotIcon className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  handleViewApplication(job.job_id)
+                                }
+                              >
+                                View Application
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  handleWithdrawApplication(job.job_id)
+                                }
+                              >
+                                Withdraw Application
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </main>
       <ToastContainer />
     </div>
