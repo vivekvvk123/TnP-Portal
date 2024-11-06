@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Link, NavLink } from "react-router-dom";
 import {
@@ -32,8 +31,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Student_Dashboard() {
   const [jobs, setJobs] = useState([]);
@@ -49,7 +48,6 @@ function Student_Dashboard() {
   }, []);
 
   function handleApplied(jobId) {
-    console.log(jobId); // Log the jobId to verify it is being passed correctly
     setAppliedJobs((prev) => ({ ...prev, [jobId]: true }));
     setJobs((prevJobs) =>
       prevJobs.map((job) => {
@@ -58,10 +56,9 @@ function Student_Dashboard() {
           updateJobInBackend(updatedJob);
           return updatedJob;
         }
-        return job; // Unmodified jobs
+        return job;
       })
     );
-
     toast.success("You have successfully applied for this job.");
   }
 
@@ -78,18 +75,16 @@ function Student_Dashboard() {
     })
       .then((response) => response.text())
       .then((data) => {
-        console.log(data); // Log the response from the server
+        console.log(data);
       })
       .catch((error) => console.error("Error updating job:", error));
   }
 
   function handleViewApplication(jobId) {
-    // Logic to view the application
     toast.info(`Viewing application for job ID: ${jobId}`);
   }
-  
+
   function handleWithdrawApplication(jobId) {
-    // Logic to withdraw the application
     setAppliedJobs((prev) => {
       const updatedJobs = { ...prev };
       delete updatedJobs[jobId];
@@ -102,7 +97,7 @@ function Student_Dashboard() {
           updateJobInBackend(updatedJob);
           return updatedJob;
         }
-        return job; // Unmodified jobs
+        return job;
       })
     );
     toast.warn(`Withdrew application for job ID: ${jobId}`);
@@ -126,7 +121,7 @@ function Student_Dashboard() {
           <NavLink
             to="/student/joblisting"
             className={({ isActive }) =>
-              ` hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
               }`
             }
@@ -146,7 +141,7 @@ function Student_Dashboard() {
             Interview Schedule
           </NavLink>
           <NavLink
-            to="/"
+            to="/coding-tests"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -179,7 +174,7 @@ function Student_Dashboard() {
             Interview Preparation
           </NavLink>
           <NavLink
-            to="referral"
+            to="/referral"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -190,8 +185,18 @@ function Student_Dashboard() {
             Referral Support
           </NavLink>
           <NavLink
-            to="/alumni"
             to="/student/resume-builder"
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
+            <UsersIcon className="h-5 w-5" />
+            Resume Builder
+          </NavLink>
+          <NavLink
+            to="/alumni"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -201,10 +206,16 @@ function Student_Dashboard() {
             <UsersIcon className="h-5 w-5" />
             Alumni Connect
           </NavLink>
-
           <NavLink
             to="/courses"
-            Resume Builder
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
+            <UsersIcon className="h-5 w-5" />
+            Certified Courses
           </NavLink>
           <NavLink
             to="/student/scheduler"
@@ -215,199 +226,10 @@ function Student_Dashboard() {
             }
           >
             <UsersIcon className="h-5 w-5" />
-            Certified Courses
-
             Scheduler
-
           </NavLink>
         </nav>
-        <div className="grid gap-4">
-          <div className="grid gap-4">
-            <Card>
-              <CardHeader className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">
-                  Job Listings
-                </CardTitle>
-                <div className="flex items-center gap-2">
-                  <Input
-                    type="search"
-                    placeholder="Search jobs..."
-                    className="w-40 bg-muted rounded-md px-3 py-1 text-sm"
-                  />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Job Title</TableHead>
-                      <TableHead>Company</TableHead>
-                      <TableHead>CGPA</TableHead>
-                      <TableHead>Branch</TableHead>
-                      <TableHead>Package</TableHead>
-                      <TableHead>Deadline</TableHead>
-                      <TableHead>Applications</TableHead>
-                      <TableHead>
-                        <span className="sr-only">Actions</span>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  {/* <TableBody>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        Software Engineer
-                      </TableCell>
-                      <TableCell>Acme Inc.</TableCell>
-                      <TableCell>8.5</TableCell>
-                      <TableCell>Computer Science</TableCell>
-                      <TableCell>₹30 LPA</TableCell>
-                      <TableCell>2024-09-30</TableCell>
-                      <TableCell>42</TableCell>
-                      <TableCell>
-                        <Button variant="outline" size="sm">
-                          Apply
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        UI/UX Designer
-                      </TableCell>
-                      <TableCell>Globex Corp.</TableCell>
-                      <TableCell>8.0</TableCell>
-                      <TableCell>Computer Science</TableCell>
-                      <TableCell>₹25 LPA</TableCell>
-                      <TableCell>2024-07-15</TableCell>
-                      <TableCell>18</TableCell>
-                      <TableCell>
-                        <Button variant="outline" size="sm">
-                          Apply
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        Data Analyst
-                      </TableCell>
-                      <TableCell>Stark Industries</TableCell>
-                      <TableCell>7.5</TableCell>
-                      <TableCell>Statistics</TableCell>
-                      <TableCell>₹20 LPA</TableCell>
-                      <TableCell>2024-09-01</TableCell>
-                      <TableCell>29</TableCell>
-                      <TableCell>
-                        <Button variant="outline" size="sm">
-                          Apply
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody> */}
-                  <TableBody>
-                    {jobs.map((job) => (
-                      <TableRow key={job.job_id}>
-                        <TableCell className="font-medium">
-                          {job.title}
-                        </TableCell>
-                        <TableCell>{job.company}</TableCell>
-                        <TableCell>{job.cgpa}</TableCell>
-                        <TableCell>{job.branch}</TableCell>
-                        <TableCell>{job.Package}</TableCell>
-                        <TableCell>{job.deadline}</TableCell>
-                        <TableCell>{job.applications}</TableCell>
-                        <TableCell>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleApplied(job.job_id)}
-                            disabled={appliedJobs[job.job_id]}
-                          >
-                            {appliedJobs[job.job_id] ? "Applied" : "Apply"}
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">
-                  Your Applications
-                </CardTitle>
-                <div className="flex items-center gap-2">
-                  <Input
-                    type="search"
-                    placeholder="Search your applications..."
-                    className="w-40 bg-muted rounded-md px-3 py-1 text-sm"
-                  />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Job Title</TableHead>
-                      <TableHead>Company</TableHead>
-                      <TableHead>CGPA</TableHead>
-                      <TableHead>Branch</TableHead>
-                      <TableHead>Package</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>
-                        <span className="sr-only">Actions</span>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {appliedJobList.map((job) => (
-                      <TableRow key={job.job_id}>
-                        <TableCell className="font-medium">
-                          {job.title}
-                        </TableCell>
-                        <TableCell>{job.company}</TableCell>
-                        <TableCell>{job.cgpa}</TableCell>
-                        <TableCell>{job.branch}</TableCell>
-                        <TableCell>{job.Package}</TableCell>
-                        <TableCell>
-                          <Badge variant="secondary">Pending</Badge>
-                        </TableCell>
-                        <TableCell>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button
-                                aria-haspopup="true"
-                                size="icon"
-                                variant="ghost"
-                              >
-                                <DotIcon className="h-4 w-4" />
-                                <span className="sr-only">Toggle menu</span>
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                              <DropdownMenuItem
-                                onClick={() => handleViewApplication(job.job_id)}
-                              >
-                                View Application
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() =>
-                                  handleWithdrawApplication(job.job_id)
-                                }
-                              >
-                                Withdraw Application
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+        {/* Rest of the component */}
       </main>
       <ToastContainer />
     </div>
