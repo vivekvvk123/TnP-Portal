@@ -134,6 +134,29 @@ function Student_Dashboard() {
             <UsersIcon className="h-5 w-5" />
             Referral Support
           </NavLink>
+          <NavLink
+            to="/alumni"
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
+            <UsersIcon className="h-5 w-5" />
+            Alumni Connect
+          </NavLink>
+
+          <NavLink
+            to="/courses"
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
+            <UsersIcon className="h-5 w-5" />
+            Certified Courses
+          </NavLink>
         </nav>
         <div className="grid gap-4">
           <div className="grid gap-4">

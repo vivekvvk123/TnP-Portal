@@ -13,7 +13,8 @@ import RecruiterFeedback from "./pages/tpo/RecruiterFeedback";
 import StudentFeedback from "./pages/tpo/StudentFeedback";
 import InterviewPreparation from "./pages/student/InterviewPreparation";
 import Home from "./pages/Home";
-
+import Alumi from "./pages/Alumni";
+import Courses from "./pages/Courses";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path:'/home',
+        path: "/home",
         element: <Home />,
       },
       {
@@ -41,23 +42,23 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path:"/student/joblisting",
+        path: "/student/joblisting",
         element: <JobListing />,
       },
       {
-        path:"placement-statistics",
+        path: "placement-statistics",
         element: <PlacementStatistics />,
       },
       {
-        path:"recruiter-feedback",
+        path: "recruiter-feedback",
         element: <RecruiterFeedback />,
       },
       {
-        path:"student-feedback",
+        path: "student-feedback",
         element: <StudentFeedback />,
       },
       {
-        path:"interview-preparation",
+        path: "interview-preparation",
         element: <InterviewPreparation />,
       },
 
@@ -68,6 +69,14 @@ const router = createBrowserRouter([
       {
         path: "/student/referral",
         element: <Referral />,
+      },
+      {
+        path: "/alumni",
+        element: <Alumi />,
+      },
+      {
+        path: "/courses",
+        element: <Courses />,
       },
     ],
   },
