@@ -50,7 +50,7 @@ const Referral = () => {
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
       <main className="flex-1 grid grid-cols-[250px_1fr] gap-4 p-4 sm:p-6">
-        <nav className="flex flex-col gap-2 bg-background rounded-lg shadow-sm">
+      <nav className="flex flex-col gap-2 bg-background rounded-lg shadow-sm">
           <Link
             to="#"
             className="flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
@@ -87,8 +87,9 @@ const Referral = () => {
             Placement Statistics
           </Link>
           <Link
-            to="/student/referral"
+            to="referral"
             className="flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
+            
           >
             <UsersIcon className="h-5 w-5" />
             Referral Support

@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Link, NavLink } from "react-router-dom";
 import {
@@ -17,15 +17,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
   Table,
+  TableHead,
   TableBody,
   TableCell,
-  TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
@@ -33,18 +31,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Student_Dashboard() {
-  const [jobs, setJobs] = React.useState([]);
+  const [jobs, setJobs] = useState([]);
+  const [appliedJobs, setAppliedJobs] = useState({});
+
+  const appliedJobList = jobs.filter((job) => appliedJobs[job.job_id]);
 
   useEffect(() => {
     fetch("/../../Backend/DB.json")
@@ -52,6 +47,66 @@ function Student_Dashboard() {
       .then((data) => setJobs(data["activeJobs"]))
       .catch((error) => console.error("Error fetching jobs:", error));
   }, []);
+
+  function handleApplied(jobId) {
+    console.log(jobId); // Log the jobId to verify it is being passed correctly
+    setAppliedJobs((prev) => ({ ...prev, [jobId]: true }));
+    setJobs((prevJobs) =>
+      prevJobs.map((job) => {
+        if (job.job_id === jobId) {
+          const updatedJob = { ...job, applications: job.applications + 1 };
+          updateJobInBackend(updatedJob);
+          return updatedJob;
+        }
+        return job; // Unmodified jobs
+      })
+    );
+
+    toast.success("You have successfully applied for this job.");
+  }
+
+  function updateJobInBackend(updatedJob) {
+    fetch("http://localhost:3000/update-job", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        jobId: updatedJob.job_id,
+        applications: updatedJob.applications,
+      }),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data); // Log the response from the server
+      })
+      .catch((error) => console.error("Error updating job:", error));
+  }
+
+  function handleViewApplication(jobId) {
+    // Logic to view the application
+    toast.info(`Viewing application for job ID: ${jobId}`);
+  }
+  
+  function handleWithdrawApplication(jobId) {
+    // Logic to withdraw the application
+    setAppliedJobs((prev) => {
+      const updatedJobs = { ...prev };
+      delete updatedJobs[jobId];
+      return updatedJobs;
+    });
+    setJobs((prevJobs) =>
+      prevJobs.map((job) => {
+        if (job.job_id === jobId) {
+          const updatedJob = { ...job, applications: job.applications - 1 };
+          updateJobInBackend(updatedJob);
+          return updatedJob;
+        }
+        return job; // Unmodified jobs
+      })
+    );
+    toast.warn(`Withdrew application for job ID: ${jobId}`);
+  }
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
@@ -80,7 +135,7 @@ function Student_Dashboard() {
             Job Listings
           </NavLink>
           <NavLink
-            to="/"
+            to="/student/interview-schedule"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -124,7 +179,7 @@ function Student_Dashboard() {
             Interview Preparation
           </NavLink>
           <NavLink
-            to="/student/referral"
+            to="referral"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -136,6 +191,7 @@ function Student_Dashboard() {
           </NavLink>
           <NavLink
             to="/alumni"
+            to="/student/resume-builder"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -148,6 +204,10 @@ function Student_Dashboard() {
 
           <NavLink
             to="/courses"
+            Resume Builder
+          </NavLink>
+          <NavLink
+            to="/student/scheduler"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -156,91 +216,13 @@ function Student_Dashboard() {
           >
             <UsersIcon className="h-5 w-5" />
             Certified Courses
+
+            Scheduler
+
           </NavLink>
         </nav>
         <div className="grid gap-4">
           <div className="grid gap-4">
-            <Card>
-              <CardHeader className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium">
-                  Upcoming Interviews
-                </CardTitle>
-                <div className="flex items-center gap-2">
-                  <Input
-                    type="search"
-                    placeholder="Search interviews..."
-                    className="w-40 bg-muted rounded-md px-3 py-1 text-sm"
-                  />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Candidate</TableHead>
-                      <TableHead>Job Title</TableHead>
-                      <TableHead>CGPA</TableHead>
-                      <TableHead>Branch</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Time</TableHead>
-                      <TableHead>
-                        <span className="sr-only">Actions</span>
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell className="font-medium">Jane Doe</TableCell>
-                      <TableCell>Software Engineer</TableCell>
-                      <TableCell>8.5</TableCell>
-                      <TableCell>Computer Science</TableCell>
-                      <TableCell>2023-06-25</TableCell>
-                      <TableCell>10:00 AM</TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <DotIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>Start Interview</DropdownMenuItem>
-                            <DropdownMenuItem>Reschedule</DropdownMenuItem>
-                            <DropdownMenuItem>Cancel</DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                  {/* <TableBody>
-                    {jobs.map((job, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="font-medium">
-                          {job.jobTitle}
-                        </TableCell>
-                        <TableCell>{job.company}</TableCell>
-                        <TableCell>{job.cgpa}</TableCell>
-                        <TableCell>{job.branch}</TableCell>
-                        <TableCell>{job.package}</TableCell>
-                        <TableCell>{job.deadline}</TableCell>
-                        <TableCell>{job.applications}</TableCell>
-                        <TableCell>
-                          <Button variant="outline" size="sm">
-                            Apply
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody> */}
-                </Table>
-              </CardContent>
-            </Card>
-
             <Card>
               <CardHeader className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium">
@@ -321,8 +303,8 @@ function Student_Dashboard() {
                     </TableRow>
                   </TableBody> */}
                   <TableBody>
-                    {jobs.map((job, index) => (
-                      <TableRow key={index}>
+                    {jobs.map((job) => (
+                      <TableRow key={job.job_id}>
                         <TableCell className="font-medium">
                           {job.title}
                         </TableCell>
@@ -333,8 +315,13 @@ function Student_Dashboard() {
                         <TableCell>{job.deadline}</TableCell>
                         <TableCell>{job.applications}</TableCell>
                         <TableCell>
-                          <Button variant="outline" size="sm">
-                            Apply
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleApplied(job.job_id)}
+                            disabled={appliedJobs[job.job_id]}
+                          >
+                            {appliedJobs[job.job_id] ? "Applied" : "Apply"}
                           </Button>
                         </TableCell>
                       </TableRow>
@@ -373,120 +360,56 @@ function Student_Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        Software Engineer
-                      </TableCell>
-                      <TableCell>Acme Inc.</TableCell>
-                      <TableCell>8.5</TableCell>
-                      <TableCell>Computer Science</TableCell>
-                      <TableCell>₹30 LPA</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">Pending</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <DotIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                              View Application
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              Withdraw Application
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        UI/UX Designer
-                      </TableCell>
-                      <TableCell>Globex Corp.</TableCell>
-                      <TableCell>8.0</TableCell>
-                      <TableCell>Computer Science</TableCell>
-                      <TableCell>₹25 LPA</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">Pending</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <DotIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                              View Application
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              Withdraw Application
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        Data Analyst
-                      </TableCell>
-                      <TableCell>Stark Industries</TableCell>
-                      <TableCell>7.5</TableCell>
-                      <TableCell>Statistics</TableCell>
-                      <TableCell>₹20 LPA</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">Pending</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <DotIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                              View Application
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              Withdraw Application
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
+                    {appliedJobList.map((job) => (
+                      <TableRow key={job.job_id}>
+                        <TableCell className="font-medium">
+                          {job.title}
+                        </TableCell>
+                        <TableCell>{job.company}</TableCell>
+                        <TableCell>{job.cgpa}</TableCell>
+                        <TableCell>{job.branch}</TableCell>
+                        <TableCell>{job.Package}</TableCell>
+                        <TableCell>
+                          <Badge variant="secondary">Pending</Badge>
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <DotIcon className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem
+                                onClick={() => handleViewApplication(job.job_id)}
+                              >
+                                View Application
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  handleWithdrawApplication(job.job_id)
+                                }
+                              >
+                                Withdraw Application
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </CardContent>
             </Card>
           </div>
-          <Card>
-            <CardHeader>
-              <CardTitle>Student Profile</CardTitle>
-            </CardHeader>
-          </Card>
         </div>
       </main>
+      <ToastContainer />
     </div>
   );
 }

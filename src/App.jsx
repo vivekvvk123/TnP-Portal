@@ -15,6 +15,9 @@ import InterviewPreparation from "./pages/student/InterviewPreparation";
 import Home from "./pages/Home";
 import Alumi from "./pages/Alumni";
 import Courses from "./pages/Courses";
+import ResumeBuilder from "./pages/student/ResumeBuilder";
+import Scheduler from "./pages/student/Scheduler";
+import Interview_Schedule from "./pages/Interview_Schedule";
 
 const router = createBrowserRouter([
   {
@@ -23,11 +26,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Login />,
+        element: <Home />,
       },
       {
         path: "/home",
         element: <Home />,
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/institute",
@@ -37,6 +42,7 @@ const router = createBrowserRouter([
         path: "/student",
         element: <Student_Dashboard />,
       },
+
       {
         path: "/student/profile",
         element: <Profile />,
@@ -46,6 +52,14 @@ const router = createBrowserRouter([
         element: <JobListing />,
       },
       {
+        path: "joblisting",
+        element: <JobListing />,
+      },
+      {
+        path: "student/interview-schedule",
+        element: <Interview_Schedule />,
+      },
+      {
         path: "placement-statistics",
         element: <PlacementStatistics />,
       },
@@ -53,6 +67,11 @@ const router = createBrowserRouter([
         path: "recruiter-feedback",
         element: <RecruiterFeedback />,
       },
+      {
+        path: "student/referral",
+        element: <Referral />,
+      },
+
       {
         path: "student-feedback",
         element: <StudentFeedback />,
@@ -67,8 +86,12 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
-        path: "/student/referral",
-        element: <Referral />,
+        path: "student/resume-builder",
+        element: <ResumeBuilder/>,
+      },
+      { path: "student/scheduler",
+        element: <Scheduler/>,
+
       },
       {
         path: "/alumni",
@@ -78,6 +101,7 @@ const router = createBrowserRouter([
         path: "/courses",
         element: <Courses />,
       },
+
     ],
   },
 ]);
