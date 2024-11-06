@@ -17,15 +17,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
   Table,
+  TableHead,
   TableBody,
   TableCell,
-  TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
@@ -33,20 +31,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Student_Dashboard() {
   const [jobs, setJobs] = useState([]);
   const [appliedJobs, setAppliedJobs] = useState({});
+
+  const appliedJobList = jobs.filter((job) => appliedJobs[job.job_id]);
 
   useEffect(() => {
     fetch("/../../Backend/DB.json")
@@ -56,23 +49,63 @@ function Student_Dashboard() {
   }, []);
 
   function handleApplied(jobId) {
-    console.log(jobId);
+    console.log(jobId); // Log the jobId to verify it is being passed correctly
     setAppliedJobs((prev) => ({ ...prev, [jobId]: true }));
-
     setJobs((prevJobs) =>
       prevJobs.map((job) => {
         if (job.job_id === jobId) {
-          return { ...job, applications: job.applications + 1 };
+          const updatedJob = { ...job, applications: job.applications + 1 };
+          updateJobInBackend(updatedJob);
+          return updatedJob;
         }
         return job; // Unmodified jobs
       })
     );
 
+    toast.success("You have successfully applied for this job.");
+  }
 
-    alert("You have successfully applied for this job.");
+  function updateJobInBackend(updatedJob) {
+    fetch("http://localhost:3000/update-job", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        jobId: updatedJob.job_id,
+        applications: updatedJob.applications,
+      }),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data); // Log the response from the server
+      })
+      .catch((error) => console.error("Error updating job:", error));
+  }
 
-
-
+  function handleViewApplication(jobId) {
+    // Logic to view the application
+    toast.info(`Viewing application for job ID: ${jobId}`);
+  }
+  
+  function handleWithdrawApplication(jobId) {
+    // Logic to withdraw the application
+    setAppliedJobs((prev) => {
+      const updatedJobs = { ...prev };
+      delete updatedJobs[jobId];
+      return updatedJobs;
+    });
+    setJobs((prevJobs) =>
+      prevJobs.map((job) => {
+        if (job.job_id === jobId) {
+          const updatedJob = { ...job, applications: job.applications - 1 };
+          updateJobInBackend(updatedJob);
+          return updatedJob;
+        }
+        return job; // Unmodified jobs
+      })
+    );
+    toast.warn(`Withdrew application for job ID: ${jobId}`);
   }
 
   return (
@@ -181,7 +214,6 @@ function Student_Dashboard() {
         </nav>
         <div className="grid gap-4">
           <div className="grid gap-4">
-            
             <Card>
               <CardHeader className="flex items-center justify-between">
                 <CardTitle className="text-sm font-medium">
@@ -319,108 +351,48 @@ function Student_Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        Software Engineer
-                      </TableCell>
-                      <TableCell>Acme Inc.</TableCell>
-                      <TableCell>8.5</TableCell>
-                      <TableCell>Computer Science</TableCell>
-                      <TableCell>₹30 LPA</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">Pending</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <DotIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                              View Application
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              Withdraw Application
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        UI/UX Designer
-                      </TableCell>
-                      <TableCell>Globex Corp.</TableCell>
-                      <TableCell>8.0</TableCell>
-                      <TableCell>Computer Science</TableCell>
-                      <TableCell>₹25 LPA</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">Pending</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <DotIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                              View Application
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              Withdraw Application
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium">
-                        Data Analyst
-                      </TableCell>
-                      <TableCell>Stark Industries</TableCell>
-                      <TableCell>7.5</TableCell>
-                      <TableCell>Statistics</TableCell>
-                      <TableCell>₹20 LPA</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">Pending</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              aria-haspopup="true"
-                              size="icon"
-                              variant="ghost"
-                            >
-                              <DotIcon className="h-4 w-4" />
-                              <span className="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem>
-                              View Application
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              Withdraw Application
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
+                    {appliedJobList.map((job) => (
+                      <TableRow key={job.job_id}>
+                        <TableCell className="font-medium">
+                          {job.title}
+                        </TableCell>
+                        <TableCell>{job.company}</TableCell>
+                        <TableCell>{job.cgpa}</TableCell>
+                        <TableCell>{job.branch}</TableCell>
+                        <TableCell>{job.Package}</TableCell>
+                        <TableCell>
+                          <Badge variant="secondary">Pending</Badge>
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <DotIcon className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem
+                                onClick={() => handleViewApplication(job.job_id)}
+                              >
+                                View Application
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  handleWithdrawApplication(job.job_id)
+                                }
+                              >
+                                Withdraw Application
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </CardContent>
@@ -428,6 +400,7 @@ function Student_Dashboard() {
           </div>
         </div>
       </main>
+      <ToastContainer />
     </div>
   );
 }

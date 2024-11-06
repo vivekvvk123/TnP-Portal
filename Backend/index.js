@@ -123,6 +123,24 @@ app.post("/login", (req, res) => {
   res.status(401).json({ message: "Invalid Credentials" });
 });
 
+
+app.post('/update-job', (req, res) => {
+  const { jobId, applications } = req.body;
+
+  const existingData = readDataFromFile();
+  const jobIndex = existingData.activeJobs.findIndex((job) => job.job_id === jobId);
+
+  if (jobIndex !== -1) {
+    existingData.activeJobs[jobIndex].applications = applications;
+
+    writeDataToFile(existingData);
+
+    res.status(200).json({ message: 'Job updated successfully' });
+  } else {
+    res.status(404).json({ message: 'Job not found' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
