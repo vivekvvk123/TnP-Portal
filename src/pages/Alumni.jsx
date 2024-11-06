@@ -11,7 +11,7 @@ function Alumni() {
 
   // Filter the alumni based on the search query
   const filteredAluminai = AluminiaData.filter((temp) =>
-    temp.name.toLowerCase().includes(searchQuery.toLowerCase())
+    temp.company.toLowerCase().includes(searchQuery.toLowerCase())
   );
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ function Alumni() {
         <div className="max-w-[1400px] mx-auto mt-5">
           <input
             type="text"
-            placeholder="Search by Name"
+            placeholder="Search by Company or Name"
             value={searchQuery}
             onChange={handleSearchChange}
             className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-md bg-white text-gray-800"
