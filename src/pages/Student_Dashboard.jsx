@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Link, NavLink } from "react-router-dom";
 import {
@@ -44,7 +44,8 @@ import {
 } from "@/components/ui/dialog";
 
 function Student_Dashboard() {
-  const [jobs, setJobs] = React.useState([]);
+  const [jobs, setJobs] = useState([]);
+  const [appliedJobs, setAppliedJobs] = useState({});
 
   useEffect(() => {
     fetch("/../../Backend/DB.json")
@@ -52,6 +53,26 @@ function Student_Dashboard() {
       .then((data) => setJobs(data["activeJobs"]))
       .catch((error) => console.error("Error fetching jobs:", error));
   }, []);
+
+  function handleApplied(jobId) {
+    console.log(jobId);
+    setAppliedJobs((prev) => ({ ...prev, [jobId]: true }));
+
+    setJobs((prevJobs) =>
+      prevJobs.map((job) => {
+        if (job.job_id === jobId) {
+          return { ...job, applications: job.applications + 1 };
+        }
+        return job; // Unmodified jobs
+      })
+    );
+
+
+    alert("You have successfully applied for this job.");
+
+
+
+  }
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
@@ -298,8 +319,8 @@ function Student_Dashboard() {
                     </TableRow>
                   </TableBody> */}
                   <TableBody>
-                    {jobs.map((job, index) => (
-                      <TableRow key={index}>
+                    {jobs.map((job) => (
+                      <TableRow key={job.job_id}>
                         <TableCell className="font-medium">
                           {job.title}
                         </TableCell>
@@ -310,8 +331,13 @@ function Student_Dashboard() {
                         <TableCell>{job.deadline}</TableCell>
                         <TableCell>{job.applications}</TableCell>
                         <TableCell>
-                          <Button variant="outline" size="sm">
-                            Apply
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleApplied(job.job_id)}
+                            disabled={appliedJobs[job.job_id]}
+                          >
+                            {appliedJobs[job.job_id] ? "Applied" : "Apply"}
                           </Button>
                         </TableCell>
                       </TableRow>
@@ -457,11 +483,6 @@ function Student_Dashboard() {
               </CardContent>
             </Card>
           </div>
-          <Card>
-            <CardHeader>
-              <CardTitle>Student Profile</CardTitle>
-            </CardHeader>
-          </Card>
         </div>
       </main>
     </div>

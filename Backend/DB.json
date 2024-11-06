@@ -61,6 +61,31 @@
       "email": "vivek@gmail.com",
       "password": "12345",
       "role": "student"
+    },
+    {
+      "email": "112116047@ece.iiitp.ac.in",
+      "password": "123",
+      "role": "student"
+    },
+    {
+      "email": "789456@ece.iiitp.ac.in",
+      "password": "123",
+      "role": "student"
+    },
+    {
+      "email": "vivk22@gmail.com",
+      "password": "11234",
+      "role": "student"
+    },
+    {
+      "email": "sdfsd@gg.sdfsjd",
+      "password": "dsfsdf",
+      "role": "student"
+    },
+    {
+      "email": "112116047@ece.iiitp.ac.in",
+      "password": "1234",
+      "role": "student"
     }
   ],
   "institutes": [
@@ -93,6 +118,26 @@
     {
       "email": "Chaitanya@gmail.com",
       "password": "qwerty",
+      "role": "institute"
+    },
+    {
+      "email": "112115131@cse.iiitp.ac.in",
+      "password": "123",
+      "role": "institute"
+    },
+    {
+      "email": "112115131@cse.iiitp.ac.in",
+      "password": "123",
+      "role": "institute"
+    },
+    {
+      "email": "kedar@iiitp.ac.in",
+      "password": "kedar123",
+      "role": "institute"
+    },
+    {
+      "email": "placements@iiitp.ac.in",
+      "password": "1234",
       "role": "institute"
     }
   ],
@@ -128,7 +173,8 @@
       "branch": "ECE",
       "Package": "25LPA",
       "deadline": "2024-09-26",
-      "applications": 0
+      "applications": 0,
+      "job_id": "697845554361b3-4e82-849d-6932d7346e62"
     },
     {
       "title": "SDE Intern",
@@ -137,7 +183,8 @@
       "branch": "ECE",
       "Package": "55 LPA",
       "deadline": "2024-09-27",
-      "applications": 0
+      "applications": 0,
+      "job_id": "697845785411b3-14d-849d-6932d7346e62"
     },
     {
       "title": "UI/UX Designer",
@@ -146,7 +193,68 @@
       "branch": "ECE",
       "Package": "55 LPA",
       "deadline": "2024-10-02",
-      "applications": 0
+      "applications": 0,
+      "job_id": "697845785411b3-4e82-849d-6932d7346512"
+    },
+    {
+      "title": "Business Analyst",
+      "company": "Walmart",
+      "cgpa": "6.0",
+      "branch": "ECE",
+      "Package": "28 LPA",
+      "deadline": "2024-09-29",
+      "applications": 0,
+      "job_id": "697845785411b3-4e82-849d-6932d7346e62"
+    },
+    {
+      "title": "SDE ",
+      "company": "Amazon",
+      "cgpa": "6.0",
+      "branch": "ECE",
+      "Package": "15 LPA",
+      "deadline": "2024-10-09",
+      "applications": 0,
+      "job_id": "6978456273-21b3-4e82-849d-6932d7346e62"
+    },
+    {
+      "title": "SDE",
+      "company": "Accenture",
+      "cgpa": "6.0",
+      "branch": "ECE",
+      "Package": "5 LPA",
+      "deadline": "2024-10-02",
+      "applications": 0,
+      "job_id": "696f2werw53464e82-849d-6932d7346e62"
+    },
+    {
+      "title": "SDE",
+      "company": "Flipkart",
+      "cgpa": "6.0",
+      "branch": "ECE",
+      "Package": "20 LPA",
+      "deadline": "2024-10-02",
+      "applications": 0,
+      "job_id": "696f2273-21b3-4e82-849d-693243tgrev6e62"
+    },
+    {
+      "title": "Cloud Engineer",
+      "company": "Flipkart",
+      "cgpa": "6.0",
+      "branch": "ECE",
+      "Package": "20 LPA",
+      "deadline": "2024-11-05",
+      "applications": 0,
+      "job_id": "696f2273-21b3-4e82-849d-6932d7346e62"
+    },
+    {
+      "title": "Cyber Security Expert",
+      "company": "Cisco",
+      "cgpa": "7.8",
+      "branch": "CSE",
+      "Package": "19 LPA",
+      "deadline": "2024-11-06",
+      "applications": 0,
+      "job_id": "ab9139ab-42c1-48a0-a359-824c25199945"
     }
   ]
 }
