@@ -13,6 +13,8 @@ import RecruiterFeedback from "./pages/tpo/RecruiterFeedback";
 import StudentFeedback from "./pages/tpo/StudentFeedback";
 import InterviewPreparation from "./pages/student/InterviewPreparation";
 import Home from "./pages/Home";
+import Alumi from "./pages/Alumni";
+import Courses from "./pages/Courses";
 import ResumeBuilder from "./pages/student/ResumeBuilder";
 import Scheduler from "./pages/student/Scheduler";
 import Interview_Schedule from "./pages/Interview_Schedule";
@@ -42,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/student/profile",
         element: <Profile />,
+      },
+      {
+        path: "/student/joblisting",
+        element: <JobListing />,
       },
       {
         path: "joblisting",
@@ -79,13 +85,17 @@ const router = createBrowserRouter([
       },
       {
         path: "student/resume-builder",
-        element: <ResumeBuilder/>,
+        element: <ResumeBuilder />,
       },
-      { path: "student/scheduler",
-        element: <Scheduler/>,
-
+      { path: "student/scheduler", element: <Scheduler /> },
+      {
+        path: "/alumni",
+        element: <Alumi />,
       },
-
+      {
+        path: "/courses",
+        element: <Courses />,
+      },
     ],
   },
 ]);

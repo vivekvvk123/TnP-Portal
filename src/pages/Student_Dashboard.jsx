@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Link, NavLink } from "react-router-dom";
 import {
@@ -32,8 +31,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Student_Dashboard() {
   const [jobs, setJobs] = useState([]);
@@ -49,7 +48,6 @@ function Student_Dashboard() {
   }, []);
 
   function handleApplied(jobId) {
-    console.log(jobId); // Log the jobId to verify it is being passed correctly
     setAppliedJobs((prev) => ({ ...prev, [jobId]: true }));
     setJobs((prevJobs) =>
       prevJobs.map((job) => {
@@ -58,10 +56,9 @@ function Student_Dashboard() {
           updateJobInBackend(updatedJob);
           return updatedJob;
         }
-        return job; // Unmodified jobs
+        return job;
       })
     );
-
     toast.success("You have successfully applied for this job.");
   }
 
@@ -78,18 +75,16 @@ function Student_Dashboard() {
     })
       .then((response) => response.text())
       .then((data) => {
-        console.log(data); // Log the response from the server
+        console.log(data);
       })
       .catch((error) => console.error("Error updating job:", error));
   }
 
   function handleViewApplication(jobId) {
-    // Logic to view the application
     toast.info(`Viewing application for job ID: ${jobId}`);
   }
-  
+
   function handleWithdrawApplication(jobId) {
-    // Logic to withdraw the application
     setAppliedJobs((prev) => {
       const updatedJobs = { ...prev };
       delete updatedJobs[jobId];
@@ -102,7 +97,7 @@ function Student_Dashboard() {
           updateJobInBackend(updatedJob);
           return updatedJob;
         }
-        return job; // Unmodified jobs
+        return job;
       })
     );
     toast.warn(`Withdrew application for job ID: ${jobId}`);
@@ -126,7 +121,7 @@ function Student_Dashboard() {
           <NavLink
             to="/student/joblisting"
             className={({ isActive }) =>
-              ` hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
               }`
             }
@@ -146,7 +141,7 @@ function Student_Dashboard() {
             Interview Schedule
           </NavLink>
           <NavLink
-            to="/"
+            to="/coding-tests"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -179,7 +174,7 @@ function Student_Dashboard() {
             Interview Preparation
           </NavLink>
           <NavLink
-            to="referral"
+            to="/referral"
             className={({ isActive }) =>
               `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
                 isActive ? "bg-blue-600 text-white" : "text-black bg-white"
@@ -199,6 +194,28 @@ function Student_Dashboard() {
           >
             <UsersIcon className="h-5 w-5" />
             Resume Builder
+          </NavLink>
+          <NavLink
+            to="/alumni"
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
+            <UsersIcon className="h-5 w-5" />
+            Alumni Connect
+          </NavLink>
+          <NavLink
+            to="/courses"
+            className={({ isActive }) =>
+              `hover:bg-muted rounded-2xl flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors ${
+                isActive ? "bg-blue-600 text-white" : "text-black bg-white"
+              }`
+            }
+          >
+            <UsersIcon className="h-5 w-5" />
+            Certified Courses
           </NavLink>
           <NavLink
             to="/student/scheduler"
@@ -377,7 +394,9 @@ function Student_Dashboard() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                               <DropdownMenuItem
-                                onClick={() => handleViewApplication(job.job_id)}
+                                onClick={() =>
+                                  handleViewApplication(job.job_id)
+                                }
                               >
                                 View Application
                               </DropdownMenuItem>
